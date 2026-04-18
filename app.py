@@ -13,7 +13,7 @@ def get_db():
         host=os.environ.get("DB_HOST", "nozomi.proxy.rlwy.net"),
         user=os.environ.get("DB_USER", "root"),
         password=os.environ.get("DB_PASSWORD", "kykMsFBHCrQCebFvLSjTMeYBKvdoHlyg"),
-        database=os.environ.get("DB_NAME", "hospital_db"),
+        database=os.environ.get("DB_NAME", "railway"),
         port=int(os.environ.get("DB_PORT", 20173))
     )
 
