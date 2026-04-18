@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>OPD Login</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body class="login-bg">
+
+<div class="container">
+
+<div class="card login-card mx-auto" style="max-width:420px">
+
+<div class="card-body p-4">
+
+<div class="text-center mb-4">
+    <i class="fas fa-hospital-user fa-3x" style="color: var(--primary); margin-bottom: 15px;"></i>
+    <h3 class="fw-bold text-white">Auth Required</h3>
+    <p class="text-muted small">Please login to access the OPD Dashboard</p>
+</div>
+
+{% if error %}
+<div class="alert alert-danger">{{error}}</div>
+{% endif %}
+
+<form method="POST">
+
+<div class="mb-3">
+    <label class="form-label text-muted small fw-bold">Username</label>
+    <div class="input-group">
+        <span class="input-group-text bg-transparent border-end-0"><i class="fas fa-user text-muted"></i></span>
+        <input name="username" class="form-control border-start-0" placeholder="Enter username" required>
+    </div>
+</div>
+
+<div class="mb-4">
+    <label class="form-label text-muted small fw-bold">Password</label>
+    <div class="input-group">
+        <span class="input-group-text bg-transparent border-end-0"><i class="fas fa-lock text-muted"></i></span>
+        <input type="password" name="password" class="form-control border-start-0" placeholder="Enter password" required>
+    </div>
+</div>
+
+<button class="btn btn-primary w-100 py-2 fw-bold">Login to Dashboard <i class="fas fa-arrow-right ms-2"></i></button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

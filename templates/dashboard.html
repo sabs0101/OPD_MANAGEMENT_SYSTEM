@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+
+<script src="/static/js/admin.js" defer></script>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+<h4 class="text-center text-white"><i class="fas fa-hospital"></i> OPD System</h4>
+
+<a href="/" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a>
+<a href="/patients/new"><i class="fas fa-user-plus"></i> Add Patient</a>
+<a href="/doctors"><i class="fas fa-user-md"></i> Doctors</a>
+<a href="/nurses"><i class="fas fa-user-nurse"></i> Nurses</a>
+<a href="/appointments"><i class="fas fa-calendar-check"></i> Appointments</a>
+<a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="main">
+
+<h2>Patient Management</h2>
+
+<div class="stats">
+
+<div class="stat">
+<h3 id="totalPatients">0</h3>
+<p>Patients</p>
+<i class="fas fa-procedures stat-icon"></i>
+</div>
+
+<div class="stat">
+<h3 id="doctorCount">0</h3>
+<p>Doctors</p>
+<i class="fas fa-user-md stat-icon"></i>
+</div>
+
+<div class="stat">
+<h3 id="nurseCount">0</h3>
+<p>Nurses</p>
+<i class="fas fa-user-nurse stat-icon"></i>
+</div>
+
+</div>
+
+<div class="card-box">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<input id="search" class="form-control w-50" placeholder="Search Patient...">
+
+<button class="btn btn-primary" onclick="location.href='/patients/new'">
+<i class="fas fa-plus"></i> Add Patient
+</button>
+
+</div>
+
+<table class="table table-hover table-borderless align-middle">
+
+<thead class="table-primary">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Disease</th>
+<th>Doctor</th>
+<th>Nurse</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="patientTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
