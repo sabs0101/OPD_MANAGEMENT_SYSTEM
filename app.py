@@ -10,11 +10,11 @@ app.secret_key = "secret123"
 # ✅ ALWAYS CREATE NEW DB CONNECTION
 def get_db():
     return mysql.connector.connect(
-        host=os.environ.get("DB_HOST", "localhost"),
+        host=os.environ.get("DB_HOST", "nozomi.proxy.rlwy.net"),
         user=os.environ.get("DB_USER", "root"),
-        password=os.environ.get("DB_PASSWORD", "root"),
+        password=os.environ.get("DB_PASSWORD", "kykMsFBHCrQCebFvLSjTMeYBKvdoHlyg"),
         database=os.environ.get("DB_NAME", "hospital_db"),
-        port=int(os.environ.get("DB_PORT", 3306))
+        port=int(os.environ.get("DB_PORT", 20173))
     )
 
 
