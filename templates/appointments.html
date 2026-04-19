@@ -61,7 +61,15 @@
     <a href="/appointments/download/{{ a.appointment_id }}" class="btn btn-sm btn-success">
         <i class="fas fa-download"></i> Download
     </a>
+    <a href="/appointments/edit/{{ a.appointment_id }}" class="btn btn-sm btn-warning ms-1">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    <a href="/appointments/delete/{{ a.appointment_id }}" class="btn btn-sm btn-danger ms-1"
+       onclick="return confirm('Delete this appointment?')">
+        <i class="fas fa-trash"></i> Delete
+    </a>
 </td>
+
 </tr>
 {% else %}
 <tr>
