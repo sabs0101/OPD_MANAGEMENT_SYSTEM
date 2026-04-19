@@ -1,6 +1,14 @@
 document.addEventListener("DOMContentLoaded",()=>{
 loadPatients()
 loadCounts()
+
+document.getElementById("search").addEventListener("keyup", function(){
+  const query = this.value.toLowerCase()
+  const rows = document.querySelectorAll("#patientTable tr")
+  rows.forEach(row => {
+    row.style.display = row.innerText.toLowerCase().includes(query) ? "" : "none"
+  })
+})
 })
 
 function loadCounts(){
