@@ -10,11 +10,11 @@ app.secret_key = "secret123"
 # ✅ ALWAYS CREATE NEW DB CONNECTION
 def get_db():
     return mysql.connector.connect(
-        host=os.environ.get("DB_HOST", "nozomi.proxy.rlwy.net"),
-        user=os.environ.get("DB_USER", "root"),
-        password=os.environ.get("DB_PASSWORD", "kykMsFBHCrQCebFvLSjTMeYBKvdoHlyg"),
-        database=os.environ.get("DB_NAME", "railway"),
-        port=int(os.environ.get("DB_PORT", 20173))
+    host=os.getenv("MYSQLHOST"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD"),
+    database=os.getenv("MYSQLDATABASE"),
+    port=int(os.getenv("MYSQLPORT"))
     )
 
 
