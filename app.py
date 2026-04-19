@@ -406,7 +406,65 @@ def download_appointment(id):
                     mimetype="application/pdf",
                     headers={"Content-Disposition": f"attachment;filename=appointment_{id}.pdf"})
 
+# ---------------- EDIT APPOINTMENT ----------------
+@app.route("/appointments/edit/<int:id>", methods=["GET", "POST"])
+def edit_appointment(id):
+    if "admin" not in session:
+        return redirect("/login")
+
+    db = get_db()
+    cursor = db.cursor(dictionary=True, buffered=True)
+
+    if request.method == "POST":
+        patient_id = request.form.get("patient_id")
+        doctor_id = request.form.get("doctor_id")
+        appointment_date = request.form.get("appointment_date")
+        appointment_time = request.form.get("appointment_time")
+
+        cursor.execute("""
+        UPDATE appointments
+        SET patient_id=%s, doctor_id=%s, appointment_date=%s, appointment_time=%s
+        WHERE appointment_id=%s
+        """, (patient_id, doctor_id, appointment_date, appointment_time, id))
+
+        db.commit()
+        db.close()
+        return redirect("/appointments")
+
+    # GET – load existing appointment + dropdowns
+    cursor.execute("SELECT * FROM appointments WHERE appointment_id=%s", (id,))
+    appointment = cursor.fetchone()
+
+    cursor.execute("SELECT patient_id, name FROM patients")
+    patients = cursor.fetchall()
+
+    cursor.execute("SELECT doctor_id, name FROM doctors")
+    doctors = cursor.fetchall()
+
+    db.close()
+
+    return render_template("edit_appointment.html",
+                           appointment=appointment,
+                           patients=patients,
+                           doctors=doctors)
+
+
+# ---------------- DELETE APPOINTMENT ----------------
+@app.route("/appointments/delete/<int:id>")
+def delete_appointment(id):
+    if "admin" not in session:
+        return redirect("/login")
+
+    db = get_db()
+    cursor = db.cursor(buffered=True)
+    cursor.execute("DELETE FROM appointments WHERE appointment_id=%s", (id,))
+    db.commit()
+    db.close()
+
+    return redirect("/appointments")
+
 
 # ---------------- RUN ----------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port = int(os.getenv("PORT", 5000)))
+
