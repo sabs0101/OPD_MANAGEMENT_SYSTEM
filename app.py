@@ -9,13 +9,28 @@ app.secret_key = "secret123"
 
 # ✅ ALWAYS CREATE NEW DB CONNECTION
 def get_db():
-    return mysql.connector.connect(
-        host=os.environ.get("DB_HOST", "nozomi.proxy.rlwy.net"),
-        user=os.environ.get("DB_USER", "root"),
-        password=os.environ.get("DB_PASSWORD", "kykMsFBHCrQCebFvLSjTMeYBKvdoHlyg"),
-        database=os.environ.get("DB_NAME", "railway"),
-        port=int(os.environ.get("DB_PORT", 20173))
-    )
+    try:
+        return mysql.connector.connect(
+            host=os.environ.get("DB_HOST", "localhost"),
+            user=os.environ.get("DB_USER", "root"),
+            password=os.environ.get("DB_PASSWORD", ""),
+            database=os.environ.get("DB_NAME", "railway"),
+            port=int(os.environ.get("DB_PORT", 3306))
+        )
+    except mysql.connector.Error as e:
+        raise ConnectionError(f"Database connection failed: {e}")
+
+
+# ---------------- HEALTH CHECK ----------------
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"}), 200
+
+
+# ---------------- DB ERROR HANDLER ----------------
+@app.errorhandler(ConnectionError)
+def handle_db_error(e):
+    return jsonify({"error": "Database unavailable", "detail": str(e)}), 503
 
 
 # ---------------- LOGIN ----------------
